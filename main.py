@@ -90,6 +90,11 @@ class MainWindow(QMainWindow):
         home_btn.triggered.connect(self.navigate_home)
         navtb.addAction(home_btn)
 
+        save_btn = QAction("S", self)
+        save_btn.setStatusTip("Save page")
+        save_btn.triggered.connect(self.save_current_page)
+        navtb.addAction(save_btn)
+
         # adding a separator
         navtb.addSeparator()
 
@@ -122,6 +127,24 @@ class MainWindow(QMainWindow):
 
         # setting window title
         self.setWindowTitle("Pervisor - journal of titles")
+
+    def save_current_page(self):
+        # Get the current browser widget
+        browser = self.tabs.currentWidget()
+
+        browser.page().toHtml(lambda html: self.save_html_to_file(html, "data/page.html"))
+
+    def save_html_to_file(self, html, file_name):
+        # Write the HTML content to the file
+        with open(file_name, 'w', encoding='utf-8') as file:
+            file.write(html)
+
+        # Show a message box to inform the user
+        msg_box = QMessageBox(self)
+        msg_box.setWindowTitle("Save Complete")
+        msg_box.setText(f"Page saved to {file_name}")
+        msg_box.open()
+        QTimer.singleShot(3000, msg_box.close)
 
     # method for adding new tab
     def add_new_tab(self, qurl=None, label="Blank"):
@@ -225,9 +248,6 @@ class MainWindow(QMainWindow):
 
 # creating a PyQt6 application
 app = QApplication(sys.argv)
-
-# setting name to the application
-app.setApplicationName("Pervisor - journal of titles")
 
 # creating MainWindow object
 window = MainWindow()
