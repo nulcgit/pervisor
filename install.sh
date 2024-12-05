@@ -17,5 +17,5 @@ pip install pandas -q
 cd $PERVISOR
 rm -rf temp
 mkdir temp
-(echo -n "$(date -u) TopTagIn system is installed." >> $PWD/data/log.txt
+(echo -e "$(date -u) Pervisor system is installed.") >> $PWD/data/log.txt
 sudo reboot
