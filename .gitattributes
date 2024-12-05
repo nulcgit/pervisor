@@ -1,0 +1,7 @@
+*.txt text eol=lf
+*.md text eol=lf
+*.go text eol=lf
+*.sh text eol=lf
+*.py text eol=lf
+LICENSE text eol=lf
+.* text eol=lf
