@@ -13,6 +13,7 @@ class MainWindow(QMainWindow):
 	# constructor
 	def __init__(self, *args, **kwargs):
 		super(MainWindow, self).__init__(*args, **kwargs)
+		self.resize(1280, 720)
 
 		# creating a tab widget
 		self.tabs = QTabWidget()
