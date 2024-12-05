@@ -12,7 +12,7 @@ sudo usermod -aG docker $USER
 python3 -m venv .venv
 source .venv/bin/activate
 python3 -m pip install --upgrade pip
-pip install pandas -q
+pip install pandas PyQt6 PyQt6-WebEngine -q
 
 cd $PERVISOR
 rm -rf temp
