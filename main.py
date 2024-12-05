@@ -48,7 +48,7 @@ class MainWindow(QMainWindow):
 		self.addToolBar(navtb)
 
 		# creating back action
-		back_btn = QAction("Back", self)
+		back_btn = QAction("<", self)
 
 		# setting status tip
 		back_btn.setStatusTip("Back to previous page")
@@ -61,19 +61,19 @@ class MainWindow(QMainWindow):
 		navtb.addAction(back_btn)
 
 		# similarly adding next button
-		next_btn = QAction("Forward", self)
+		next_btn = QAction(">", self)
 		next_btn.setStatusTip("Forward to next page")
 		next_btn.triggered.connect(lambda: self.tabs.currentWidget().forward())
 		navtb.addAction(next_btn)
 
 		# similarly adding reload button
-		reload_btn = QAction("Reload", self)
+		reload_btn = QAction("@", self)
 		reload_btn.setStatusTip("Reload page")
 		reload_btn.triggered.connect(lambda: self.tabs.currentWidget().reload())
 		navtb.addAction(reload_btn)
 
 		# creating home action
-		home_btn = QAction("Home", self)
+		home_btn = QAction("H", self)
 		home_btn.setStatusTip("Go home")
 
 		# adding action to home button
@@ -93,7 +93,7 @@ class MainWindow(QMainWindow):
 		navtb.addWidget(self.urlbar)
 
 		# similarly adding stop action
-		stop_btn = QAction("Stop", self)
+		stop_btn = QAction("X", self)
 		stop_btn.setStatusTip("Stop loading current page")
 		stop_btn.triggered.connect(lambda: self.tabs.currentWidget().stop())
 		navtb.addAction(stop_btn)
@@ -105,7 +105,7 @@ class MainWindow(QMainWindow):
 		self.show()
 
 		# setting window title
-		self.setWindowTitle("Geek PyQt6")
+		self.setWindowTitle("Pervisor - journal of titles")
 
 	# method for adding new tab
 	def add_new_tab(self, qurl = None, label ="Blank"):
@@ -179,7 +179,7 @@ class MainWindow(QMainWindow):
 		title = self.tabs.currentWidget().page().title()
 
 		# set the window title
-		self.setWindowTitle("% s - Geek PyQt6" % title)
+		self.setWindowTitle("% s - Pervisor" % title)
 
 	# action to go to home
 	def navigate_home(self):
@@ -220,7 +220,7 @@ class MainWindow(QMainWindow):
 app = QApplication(sys.argv)
 
 # setting name to the application
-app.setApplicationName("Geek PyQt5")
+app.setApplicationName("Pervisor - journal of titles")
 
 # creating MainWindow object
 window = MainWindow()
