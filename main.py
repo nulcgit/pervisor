@@ -6,6 +6,7 @@ from PyQt6.QtWebEngineWidgets import *
 from PyQt6.QtPrintSupport import *
 import os
 import sys
+import subprocess
 
 # Custom QWebEngineView to handle target="_blank"
 class CustomWebEngineView(QWebEngineView):
@@ -42,8 +43,63 @@ class MainWindow(QMainWindow):
         # adding action when tab close is requested
         self.tabs.tabCloseRequested.connect(self.close_current_tab)
 
-        # making tabs as central widget
-        self.setCentralWidget(self.tabs)
+        # creating a sidebar
+        self.sidebar = QWidget()
+        self.sidebar_layout = QVBoxLayout()
+        self.sidebar.setLayout(self.sidebar_layout)
+
+        # creating another text view
+        self.text_view = QTextEdit()
+        self.text_view.setReadOnly(True)
+        self.text_view.setPlaceholderText("Text view area")
+
+        # creating buttons for sidebar
+        self.run_first_btn = QPushButton("Run first.py")
+        self.run_second_btn = QPushButton("Run second.py")
+        self.run_third_btn = QPushButton("Run third.py")
+        self.run_fourth_btn = QPushButton("Run fourth.py")
+        self.run_fifth_btn = QPushButton("Run fifth.py")
+        self.run_sixth_btn = QPushButton("Run sixth.py")
+
+        # creating a text field
+        self.text_field = QLineEdit()
+        self.text_field.setPlaceholderText("Enter text here")
+
+        # creating a grid layout for buttons
+        self.button_grid = QGridLayout()
+        self.button_grid.addWidget(self.run_first_btn, 0, 0)
+        self.button_grid.addWidget(self.run_second_btn, 0, 1)
+        self.button_grid.addWidget(self.run_third_btn, 0, 2)
+        self.button_grid.addWidget(self.run_fourth_btn, 1, 0)
+        self.button_grid.addWidget(self.run_fifth_btn, 1, 1)
+        self.button_grid.addWidget(self.run_sixth_btn, 1, 2)
+
+        # adding the grid layout to the sidebar layout
+        self.sidebar_layout.addLayout(self.button_grid)
+
+        # adding the text field to the sidebar layout
+        self.sidebar_layout.addWidget(self.text_field)
+
+        # adding the text view to the sidebar layout
+        self.sidebar_layout.addWidget(self.text_view)
+
+        # connecting buttons to actions
+        self.run_first_btn.clicked.connect(self.run_first_script)
+        self.run_second_btn.clicked.connect(self.run_second_script)
+        self.run_third_btn.clicked.connect(self.run_third_script)
+        self.run_fourth_btn.clicked.connect(self.run_fourth_script)
+        self.run_fifth_btn.clicked.connect(self.run_fifth_script)
+        self.run_sixth_btn.clicked.connect(self.run_sixth_script)
+
+        # creating a main layout
+        self.main_layout = QHBoxLayout()
+        self.main_layout.addWidget(self.sidebar, 1)
+        self.main_layout.addWidget(self.tabs, 4)
+
+        # creating a central widget
+        self.central_widget = QWidget()
+        self.central_widget.setLayout(self.main_layout)
+        self.setCentralWidget(self.central_widget)
 
         # creating a status bar
         self.status = QStatusBar()
@@ -245,6 +301,48 @@ class MainWindow(QMainWindow):
 
         # set cursor position
         self.urlbar.setCursorPosition(0)
+
+    # method to run first.py
+    def run_first_script(self):
+        try:
+            subprocess.run(["python", "first.py"], check=True)
+        except subprocess.CalledProcessError as e:
+            print(f"Error running first.py: {e}")
+
+    # method to run second.py
+    def run_second_script(self):
+        try:
+            subprocess.run(["python", "second.py"], check=True)
+        except subprocess.CalledProcessError as e:
+            print(f"Error running second.py: {e}")
+
+    # method to run third.py
+    def run_third_script(self):
+        try:
+            subprocess.run(["python", "third.py"], check=True)
+        except subprocess.CalledProcessError as e:
+            print(f"Error running third.py: {e}")
+
+    # method to run fourth.py
+    def run_fourth_script(self):
+        try:
+            subprocess.run(["python", "fourth.py"], check=True)
+        except subprocess.CalledProcessError as e:
+            print(f"Error running fourth.py: {e}")
+
+    # method to run fifth.py
+    def run_fifth_script(self):
+        try:
+            subprocess.run(["python", "fifth.py"], check=True)
+        except subprocess.CalledProcessError as e:
+            print(f"Error running fifth.py: {e}")
+
+    # method to run sixth.py
+    def run_sixth_script(self):
+        try:
+            subprocess.run(["python", "sixth.py"], check=True)
+        except subprocess.CalledProcessError as e:
+            print(f"Error running sixth.py: {e}")
 
 # creating a PyQt6 application
 app = QApplication(sys.argv)
