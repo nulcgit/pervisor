@@ -98,6 +98,12 @@ class MainWindow(QMainWindow):
 		stop_btn.triggered.connect(lambda: self.tabs.currentWidget().stop())
 		navtb.addAction(stop_btn)
 
+		# similarly adding go action
+		go_btn = QAction("Go", self)
+		go_btn.setStatusTip("Go loading current page")
+		navtb.addAction(go_btn)
+		go_btn.triggered.connect(self.navigate_to_url)
+
 		# creating first tab
 		self.add_new_tab(QUrl('http://www.google.com'), 'Homepage')
 
