@@ -13,6 +13,14 @@ python3 -m venv .venv
 source .venv/bin/activate
 python3 -m pip install --upgrade pip
 pip install pandas PyQt6 PyQt6-WebEngine -q
+wget -O temp/yggdrasil.deb https://github.com/yggdrasil-network/yggdrasil-go/releases/download/v0.5.10/yggdrasil-0.5.10-amd64.deb
+sudo dpkg -i temp/yggdrasil.deb
+sudo systemctl daemon-reload
+sudo systemctl enable yggdrasil
+sudo systemctl restart yggdrasil
+sudo sed -i 's/Listen\: \[\]/Listen\: \[\]\n  AdminListen: 127.0.0.1\:9001/g' /etc/yggdrasil/yggdrasil.conf
+sudo sed -i "s/NodeInfo: {}/NodeInfo: \{\n  name\: \"pervisor$(date -u +%Y%m%d%H%M%S)$HOSTNAME\"\n  \}/g" /etc/yggdrasil/yggdrasil.conf
+sudo systemctl restart yggdrasil
 
 cd $PERVISOR
 rm -rf temp
